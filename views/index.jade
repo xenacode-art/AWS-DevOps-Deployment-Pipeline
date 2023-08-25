@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container(ng-app="accumulatorApp")
+    h1= title
+    h3#env-notice #{environmentNotice}
+    p Enter messages to accumulate
+    div(ng-controller="AccumulatorController")
+      form(ng-submit="add()")
+        input(type="text", placeholder="Enter a message", ng-model="item")
+        // disable button if item is empty
+        input.btn-primary(type="submit", value="Add", ng-disabled="!item.length")
+      ul#center-list
+        li(ng-repeat="item in accumulator track by $index")
+          | {{item}}
+    h3 EC2 Instance IP Address: #[span#server-notice #{localAddress}] 
